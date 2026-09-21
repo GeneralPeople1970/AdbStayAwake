@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- LSPosed 管理器中显示的模块名 -->
+    <string name="app_name">ADB调试常亮</string>
+    <!-- LSPosed 管理器中显示的模块描述（一句话） -->
+    <string name="module_description">ADB 调试连接时保持屏幕常亮。</string>
+</resources>

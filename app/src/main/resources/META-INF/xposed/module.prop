@@ -1,0 +1,9 @@
+id=adbstayawake
+name=ADB调试常亮
+version=1.0
+versionCode=1
+author=GeneralPeople1970
+description=ADB调试连接时保持屏幕常亮。
+minApiVersion=102
+targetApiVersion=102
+staticScope=true

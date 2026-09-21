@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    无界面模块：
+    - 不声明任何 <activity>，因此桌面不会出现启动图标（没有 LAUNCHER）。
+    - 不声明任何 service / receiver / provider，安装后没有任何可运行组件。
+    - android:label / android:description 供 LSPosed 管理器显示模块名与说明
+      （现代 Xposed API 使用清单里的 label/description 作为模块名称与描述）。
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application
+        android:allowBackup="false"
+        android:description="@string/module_description"
+        android:hasCode="true"
+        android:label="@string/app_name"
+        android:supportsRtl="true" />
+
+</manifest>

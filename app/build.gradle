@@ -1,0 +1,56 @@
+plugins {
+    id 'com.android.application'
+}
+
+// 从项目根目录的 keystore.properties 读取签名凭据（该文件不提交到版本库）。
+def keystorePropsFile = rootProject.file('keystore.properties')
+def keystoreProps = new Properties()
+if (keystorePropsFile.exists()) {
+    keystoreProps.load(new FileInputStream(keystorePropsFile))
+}
+
+android {
+    namespace 'io.github.generalpeople1970.adbstayawake'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId 'io.github.generalpeople1970.adbstayawake'
+        minSdk 26          // Android 8.0
+        targetSdk 35       // Android 15
+        versionCode 1
+        versionName '1.0'
+    }
+
+    signingConfigs {
+        release {
+            if (keystorePropsFile.exists()) {
+                storeFile rootProject.file(keystoreProps['storeFile'])
+                storePassword keystoreProps['storePassword']
+                keyAlias keystoreProps['keyAlias']
+                keyPassword keystoreProps['keyPassword']
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            // 不做代码混淆/压缩：避免入口类 MainModule 被裁剪或改名，
+            // 保证 META-INF/xposed/java_init.list 中登记的类名始终有效。
+            minifyEnabled false
+            // 有凭据则用 release 签名；否则回退默认（便于无凭据环境仍能构建）。
+            if (keystorePropsFile.exists()) {
+                signingConfig signingConfigs.release
+            }
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    // 仅编译期依赖：真正的实现由 LSPosed 框架在运行时注入，不打包进 APK。
+    compileOnly 'io.github.libxposed:api:102.0.0'
+}

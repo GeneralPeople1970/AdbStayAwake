@@ -1,0 +1,19 @@
+.gradle/
+build/
+/local.properties
+/.idea/
+*.iml
+.DS_Store
+/captures
+.externalNativeBuild
+.cxx
+/_docs/
+
+# 签名密钥与凭据（严禁提交）
+*.keystore
+*.jks
+/keystore.properties
+
+# 会话 / 工具本地文件
+/.claude/
+/.mcp.json
